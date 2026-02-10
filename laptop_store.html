@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔记本商城 - 精选笔记本 畅享高效</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f0f12;
+            --bg-card: #1a1a1f;
+            --accent: #00d4aa;
+            --accent-hover: #00f5c4;
+            --text: #e8e8ed;
+            --text-muted: #8b8b9a;
+            --border: #2a2a32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* 顶部导航 */
+        header {
+            background: rgba(15, 15, 18, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* 主视觉区 */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* 产品分类 */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* 产品网格 */
+        .products {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.15);
+        }
+
+        .product-image {
+            height: 180px;
+            background: linear-gradient(145deg, #252530 0%, #1a1a1f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-brand {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-specs {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .product-price span {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .add-cart {
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .add-cart:hover {
+            background: var(--accent-hover);
+        }
+
+        /* 页脚 */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">💻 笔记本商城</div>
+            <div class="nav-links">
+                <a href="#products">精选产品</a>
+                <a href="#brands">品牌专区</a>
+                <a href="#service">售后服务</a>
+                <a href="#contact">联系我们</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>精选笔记本，畅享高效办公</h1>
+            <p>专业选品，正品保障，全场包邮。轻薄本、游戏本、商务本应有尽有，总有一款适合你。</p>
+            <a href="#products" class="cta-btn">立即选购</a>
+        </section>
+
+        <div class="categories">
+            <button class="cat-btn active">全部</button>
+            <button class="cat-btn">轻薄本</button>
+            <button class="cat-btn">游戏本</button>
+            <button class="cat-btn">商务本</button>
+            <button class="cat-btn">创作者本</button>
+        </div>
+
+        <section id="products" class="products">
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">联想 ThinkPad</div>
+                    <div class="product-name">ThinkPad X1 Carbon 2024</div>
+                    <div class="product-specs">i7-1365U | 16GB | 512GB SSD | 14"</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥9,999 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">苹果 MacBook</div>
+                    <div class="product-name">MacBook Pro 14" M3</div>
+                    <div class="product-specs">M3 Pro | 18GB | 512GB | 14.2"  Retina</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥14,999 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">华硕 ROG</div>
+                    <div class="product-name">ROG 幻16 2024</div>
+                    <div class="product-specs">i9-14900H | RTX 4070 | 32GB | 1TB</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥12,999 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">华为 MateBook</div>
+                    <div class="product-name">MateBook X Pro 2024</div>
+                    <div class="product-specs">i7-1360P | 16GB | 1TB SSD | 14.2" 3K</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥9,499 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">戴尔 XPS</div>
+                    <div class="product-name">XPS 13 Plus</div>
+                    <div class="product-specs">i7-1360P | 16GB | 512GB | 13.4" 4K</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥11,299 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+            <article class="product-card">
+                <div class="product-image">🖥️</div>
+                <div class="product-info">
+                    <div class="product-brand">小米 Redmi</div>
+                    <div class="product-name">Redmi Book Pro 15</div>
+                    <div class="product-specs">i5-13500H | 16GB | 512GB | 15.6"</div>
+                    <div class="product-footer">
+                        <div class="product-price">¥4,999 <span>起</span></div>
+                        <button class="add-cart">加入购物车</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 笔记本商城 · 正品保证 · 7天无理由退换 · <a href="#">隐私政策</a> · <a href="#">服务条款</a></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.add-cart').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.closest('.product-card').querySelector('.product-name').textContent;
+                alert('已将「' + name + '」加入购物车！');
+            });
+        });
+
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
